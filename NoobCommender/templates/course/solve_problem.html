@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Courses</h2>
+<br>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Problem Code</th>
+          <th>Problem Points</th>
+          <th>Problem Statement</th>
+          <th>Add TODO</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for prob in problem_set %}
+          <tr>
+            <td class="align-middle">{{ prob.problem_code }}</td>
+            <td class="align-middle">{{ prob.problem_points }}</td>
+            <td class="align-middle">
+                <a href="https://www.codechef.com/problems/{{prob.problem_code}}">View</a></td>
+            </td>
+            <td class="text-right">
+            {% if prob.problem_TODO %}
+              <button class="btn btn-primary" disabled>  Add +</button>
+            {% else %}
+              <a href="{% url 'add_TODO' prob.course.id prob.problem_code %}" class="btn btn-primary">ADD +</a>
+            {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">No quiz matching your interests right now.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

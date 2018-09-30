@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'course/_header.html' with active='taken' %}
+
+<P style="margin-left: 10fr">
+  <a class="btn btn-primary" href="{% url 'create'%}">Create Course +</a><br>
+</p>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Courses</th>
+          <th>Problem Count</th>
+          <th>Tags</th>
+          <th>Total Points</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+          <tr>
+            <td class="align-middle">{{ course.name }}</td>
+            <td class="align-middle">{{ course.problems_count }} Problems</td>
+            <td class="align-middle">{{ course.tag }}</td>
+            <td class="align-middle">{{course.solved_problem_points}}/{{ course.collective_points }} Score</td>
+            <td class="text-right">
+            
+            <a href="{% url 'take_course' course.pk %}" class="btn btn-primary">Start quiz</a>
+                
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">No quiz matching your interests right now.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

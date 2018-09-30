@@ -1,0 +1,10 @@
+<h2>Courses</h2>
+
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link{% if active == 'new' %} active{% endif %}" href="{% url 'dashboard' %}">New</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'taken_course_list' %}">Completed</a>
+  </li>
+</ul>
